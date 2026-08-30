@@ -27,21 +27,21 @@ function getShopIcon(emoji, bgColor) {
 
 // Эволюции
 const evolutions = [
-    { title: "Бомж-Бекон", cost: 0, sprite: "assets/bacon_0.png" },
-    { title: "Обычный Бекон", cost: 250, sprite: "assets/bacon_1.png" },
-    { title: "Новичок Обби", cost: 1500, sprite: "assets/bacon_2.png" }, 
-    { title: "Про в Прятках", cost: 15000, sprite: "assets/bacon_3.png" },
-    { title: "Фармер Тайкунов", cost: 100000, sprite: "assets/bacon_4.png" },
-    { title: "Игрок Adopt Me", cost: 500000, sprite: "assets/bacon_5.png" },
-    { title: "Мамкин Трейдер", cost: 2500000, sprite: "assets/bacon_6.png" },
-    { title: "Донатер", cost: 15000000, sprite: "assets/bacon_7.png" },
-    { title: "Миллионер", cost: 100000000, sprite: "assets/bacon_8.png" },
-    { title: "Ютубер Роблокс", cost: 500000000, sprite: "assets/bacon_9.png" },
-    { title: "Владелец Сервера", cost: 2500000000, sprite: "assets/bacon_10.png" },
-    { title: "Создатель Игры", cost: 15000000000, sprite: "assets/bacon_11.png" },
-    { title: "Роблокс-Админ", cost: 100000000000, sprite: "assets/bacon_14.png" },
-    { title: "Властелин Роблокса", cost: 500000000000, sprite: "assets/bacon_12.png" },
-    { title: "Роблокс-Бог", cost: 5000000000000, sprite: "assets/bacon_13.png" }
+    { title: "Бомж-Бекон", cost: 0, sprite: "bacon_0.png" },
+    { title: "Обычный Бекон", cost: 250, sprite: "bacon_1.png" },
+    { title: "Новичок Обби", cost: 1500, sprite: "bacon_2.png" }, 
+    { title: "Про в Прятках", cost: 15000, sprite: "bacon_3.png" },
+    { title: "Фармер Тайкунов", cost: 100000, sprite: "bacon_4.png" },
+    { title: "Игрок Adopt Me", cost: 500000, sprite: "bacon_5.png" },
+    { title: "Мамкин Трейдер", cost: 2500000, sprite: "bacon_6.png" },
+    { title: "Донатер", cost: 15000000, sprite: "bacon_7.png" },
+    { title: "Миллионер", cost: 100000000, sprite: "bacon_8.png" },
+    { title: "Ютубер Роблокс", cost: 500000000, sprite: "bacon_9.png" },
+    { title: "Владелец Сервера", cost: 2500000000, sprite: "bacon_10.png" },
+    { title: "Создатель Игры", cost: 15000000000, sprite: "bacon_11.png" },
+    { title: "Роблокс-Админ", cost: 100000000000, sprite: "bacon_14.png" },
+    { title: "Властелин Роблокса", cost: 500000000000, sprite: "bacon_12.png" },
+    { title: "Роблокс-Бог", cost: 5000000000000, sprite: "bacon_13.png" }
 ];
 
 // Магазин
