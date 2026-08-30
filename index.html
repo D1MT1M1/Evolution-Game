@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Эволюция Бекона</title>
+    <!-- Yandex Games SDK -->
+    <script src="https://yandex.ru/games/sdk/v2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container" id="game-container">
+            <!-- Верхняя панель -->
+            <div class="sys-panel">
+                <button id="btn-achievements" class="bouncy-btn sys-btn accent-blue">🏆 Ачивки</button>
+                <div class="right-controls">
+                    <!-- КНОПКА ДЛЯ ТЕСТОВ (ЧИТ) -->
+                    <button id="btn-cheat" class="bouncy-btn sys-btn" style="background:#8e44ad; color:white; box-shadow:0 6px 0 #6c3483;">💰 ЧИТ</button>
+                    <button id="btn-view-toggle" class="bouncy-btn sys-btn">📱 Мобильный вид</button>
+                    <button id="btn-settings" class="bouncy-btn sys-btn">⚙️ Настройки</button>
+                </div>
+            </div>
+
+            <div class="game-area" id="game-area">
+                <!-- Левая панель: Кликер и Эволюция -->
+                <div class="clicker-section">
+                    <div class="status-bar">
+                        <h2 class="badge" id="job-title">Бомж-Бекон</h2>
+                        <h1 class="balance-text">R$ <span id="balance">0</span></h1>
+                        <p class="cps-text">Пассив: <span id="cps">0</span> / сек</p>
+                    </div>
+                    
+                    <div id="main-click-btn" class="click-target">
+                        <img id="main-avatar" src="assets/bacon_0.png" alt="Бекон" draggable="false">
+                    </div>
+
+                    <!-- КОМБО-МЕТР -->
+                    <div id="combo-container" class="combo-container">
+                        <div id="combo-bar" class="combo-bar"></div>
+                        <span id="combo-text" class="combo-text">Кликай быстрее!</span>
+                    </div>
+                    
+                    <div class="evolve-container">
+                        <button id="btn-evolve" class="bouncy-btn btn-evolve">
+                            ⭐ Эволюция: Обычный Бекон (R$ 50)
+                        </button>
+                    </div>
+
+                    <!-- ПРЕСТИЖ (РЕБЁРТ) -->
+                    <div class="prestige-container">
+                        <button id="btn-prestige" class="bouncy-btn btn-prestige hidden">
+                            🔄 Сделать Ребёрт (Сброс)
+                        </button>
+                        <p class="prestige-info hidden" id="prestige-info">Множитель Ребёрта: x<span id="prestige-mult">1.0</span></p>
+                    </div>
+                    
+                    <!-- РЕКЛАМНЫЕ БУСТЫ -->
+                    <div class="ads-section">
+                        <p class="ads-title">🎁 Бусты за рекламу:</p>
+                        <div class="ads-buttons">
+                            <button class="bouncy-btn ad-btn ad-green" onclick="startAdSequence('x2')">💸 x2 Доход (60с)</button>
+                            <button class="bouncy-btn ad-btn ad-yellow" onclick="startAdSequence('x5')">🔥 x5 Доход (15с)</button>
+                            <button class="bouncy-btn ad-btn ad-red" onclick="startAdSequence('auto')">🤖 Автоклик (20с)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая панель: Магазин -->
+                <div class="shop-section">
+                    <h3 class="shop-title">🛒 Магазин</h3>
+                    <div id="upgrades-container" class="upgrades-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно предупреждения перед рекламой -->
+    <div id="ad-warning-modal" class="modal-overlay hidden" style="z-index: 9999;">
+        <div class="modal-content" style="text-align: center; border: 4px solid #f1c40f;">
+            <h2 style="color: #f39c12; font-size: 2rem; margin-bottom: 20px;">Внимание!</h2>
+            <p style="font-size: 1.2rem; color: #2d3436; margin-bottom: 20px;">Реклама будет показана через:</p>
+            <div id="ad-countdown" style="font-size: 5rem; font-weight: bold; color: #e74c3c;">3</div>
+        </div>
+    </div>
+
+    <!-- Модальные окна (Ачивки и Настройки) -->
+    <div id="achievements-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏆 Твои ачивки</h2>
+                <button id="btn-close-achievements" class="close-btn">✖</button>
+            </div>
+            <div id="achievements-list" class="achievements-list"></div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content settings-content">
+            <div class="modal-header">
+                <h2>⚙️ Настройки</h2>
+                <button id="btn-close-settings" class="close-btn">✖</button>
+            </div>
+            <div class="settings-group">
+                <label>🎵 Громкость Музыки</label>
+                <input type="range" id="slider-music" class="jelly-slider" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <div class="settings-group">
+                <label>🔊 Громкость Эффектов</label>
+                <input type="range" id="slider-sfx" class="jelly-slider" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <div class="settings-group buttons-group">
+                <button id="btn-fullscreen" class="bouncy-btn sys-btn" style="width: 100%;">📺 На весь экран</button>
+                <button id="btn-reset" class="bouncy-btn danger" style="width: 100%; margin-top: 15px;">🗑️ Удалить сохранение</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
